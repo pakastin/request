@@ -7,20 +7,20 @@ export function get (url, cb, pcb) {
   request.onload = function () {
     if (request.status >= 200 && request.status < 400) {
       // Success!
-      cb(null, request.responseText);
+      cb && cb(null, request.responseText);
     } else {
       // We reached our target server, but it returned an error
-      cb(request.statusText);
+      cb && cb(request.statusText);
     }
   };
 
   request.onprogress = function (e) {
-    pcb(request.responseText);
+    pcb && pcb(request.responseText);
   }
 
   request.onerror = function (err) {
     // There was a connection error of some sort
-    cb(err);
+    cb && cb(err);
   };
 
   request.send();
@@ -37,9 +37,9 @@ export function jsonstream (url, cb, pcb) {
   request.onload = function () {
     if (request.status >= 200 && request.status < 400) {
       buffer(request.responseText, true);
-      cb(null, results.join(','));
+      cb && cb(null, results.join(','));
     } else {
-      cb(request.statusText);
+      cb && cb(request.statusText);
     }
   };
 
@@ -48,7 +48,7 @@ export function jsonstream (url, cb, pcb) {
   }
 
   request.onerror = function (err) {
-    cb(err);
+    cb && cb(err);
   };
 
   request.send();
@@ -60,7 +60,7 @@ export function jsonstream (url, cb, pcb) {
     while (buffered < len) {
       var part = parts[buffered].slice(0, -1);
       results.push(part);
-      pcb('[' + part + ']');
+      pcb && pcb('[' + part + ']');
       buffered++;
     }
   }
