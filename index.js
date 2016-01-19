@@ -1,4 +1,30 @@
 
+export function post (url, data, cb, pcb) {
+  var request = new XMLHttpRequest();
+
+  request.open('POST', url, true);
+
+  request.setRequestHeader('Content-Type', 'application/json; charset=UTF-8');
+
+  request.onload = function () {
+    if (request.status >= 200 && request.status < 400) {
+      cb && cb(null, request.responseText);
+    } else {
+      cb && cb(request.statusText, request.responseText);
+    }
+  }
+
+  request.onprogress = function (e) {
+    pcb && pcb(request.responseText);
+  }
+
+  request.onerror = function (err) {
+    cb && cb(err, request.responseText);
+  }
+
+  request.send(data);
+}
+
 export function get (url, cb, pcb) {
   var request = new XMLHttpRequest();
 
@@ -6,20 +32,17 @@ export function get (url, cb, pcb) {
 
   request.onload = function () {
     if (request.status >= 200 && request.status < 400) {
-      // Success!
       cb && cb(null, request.responseText);
     } else {
-      // We reached our target server, but it returned an error
       cb && cb(request.statusText, request.responseText);
     }
-  };
+  }
 
   request.onprogress = function (e) {
     pcb && pcb(request.responseText);
   }
 
   request.onerror = function (err) {
-    // There was a connection error of some sort
     cb && cb(err, request.responseText);
   };
 
