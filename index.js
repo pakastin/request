@@ -39,7 +39,7 @@ export function jsonstream (url, cb, pcb) {
       buffer(request.responseText, true);
       cb && cb(null, results.join(','));
     } else {
-      cb && cb(request.statusText);
+      cb && cb(request.statusText, request.responseText);
     }
   };
 
@@ -48,7 +48,7 @@ export function jsonstream (url, cb, pcb) {
   }
 
   request.onerror = function (err) {
-    cb && cb(err);
+    cb && cb(err, request.responseText);
   };
 
   request.send();
