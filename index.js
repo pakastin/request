@@ -10,7 +10,7 @@ export function get (url, cb, pcb) {
       cb && cb(null, request.responseText);
     } else {
       // We reached our target server, but it returned an error
-      cb && cb(request.statusText);
+      cb && cb(request.statusText, request.responseText);
     }
   };
 
@@ -20,7 +20,7 @@ export function get (url, cb, pcb) {
 
   request.onerror = function (err) {
     // There was a connection error of some sort
-    cb && cb(err);
+    cb && cb(err, request.responseText);
   };
 
   request.send();
