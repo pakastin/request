@@ -5,6 +5,7 @@ export function post (url, data, cb, pcb) {
   request.open('POST', url, true);
 
   request.setRequestHeader('Content-Type', 'application/json; charset=UTF-8');
+  request.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
 
   request.onload = function () {
     if (request.status >= 200 && request.status < 400) {
@@ -29,6 +30,8 @@ export function get (url, cb, pcb) {
   var request = new XMLHttpRequest();
 
   request.open('GET', url, true);
+
+  request.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
 
   request.onload = function () {
     if (request.status >= 200 && request.status < 400) {
@@ -56,6 +59,8 @@ export function jsonstream (url, cb, pcb) {
   var results = [];
 
   request.open('GET', url, true);
+
+  request.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
 
   request.onload = function () {
     if (request.status >= 200 && request.status < 400) {
