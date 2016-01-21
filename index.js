@@ -23,7 +23,7 @@ export function post (url, data, cb, pcb) {
     cb && cb(err, request.responseText);
   }
 
-  request.send(data);
+  data && request.send(data);
 }
 
 export function get (url, cb, pcb) {
