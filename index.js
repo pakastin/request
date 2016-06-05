@@ -28,6 +28,8 @@ export function post (url, data, cb, pcb) {
   } else {
     request.send();
   }
+  
+  return request;
 }
 
 export function get (url, cb, pcb) {
@@ -54,6 +56,8 @@ export function get (url, cb, pcb) {
   };
 
   request.send();
+
+  return request;
 }
 
 
@@ -96,4 +100,6 @@ export function jsonstream (url, cb, pcb) {
       buffered++;
     }
   }
+
+  return request;
 }
