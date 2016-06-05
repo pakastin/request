@@ -1,6 +1,6 @@
 {
   "name": "@pakastin/request",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "description": "Simple AJAX requests",
   "jsnext:main": "index.js",
   "scripts": {
