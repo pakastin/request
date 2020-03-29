@@ -10,6 +10,7 @@ get('data.json', (err, data) => {
   }
   console.log(JSON.parse(data));
 });
+```
 
 ## post(url, data, cb)
 ```js
@@ -20,3 +21,4 @@ post('data.json', JSON.stringify(data), (err, data) => {
   }
   console.log(JSON.parse(data));
 });
+```
